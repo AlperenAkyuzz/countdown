@@ -1,32 +1,237 @@
 <template>
   <div>
-    <div class="square"></div>
-    <div class="circle"></div>
-    <div class="triangle-up"></div>
+    <div class="lines">
+      <div class="line"></div>
+      <div class="line" style="left: 75%;"></div>
+      <div class="line"></div>
+    </div>
+    <div class="right">
+      <div class="square" v-show="isActiveSquare" :class="isActiveSquare ? 'fade-in' : ''"></div>
+    </div>
+    <div class="center">
+      <div class="triangle-up fade-in"></div>
+    </div>
+    <div class="left">
+      <div class="circle" v-show="isActiveCircle" :class="isActiveCircle ? 'fade-in' : ''"></div>
+    </div>
+
   </div>
 </template>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: #171717;
+  color: #000;
+  line-height: 1.6;
+  position: relative;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.left {
+  position: absolute;
+  left: 12.5%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.right {
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  margin: auto;
+  width: 90vw;
+}
+
+.line {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.line::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 15vh;
+  width: 100%;
+  top: -50%;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+  -webkit-animation: drop 7s 0s infinite;
+  animation: drop 7s 0s infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+.line:nth-child(1) {
+  margin-left: -25%;
+}
+.line:nth-child(1)::after {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+.line:nth-child(3) {
+  margin-left: 75%;
+}
+.line:nth-child(3)::after {
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+@-webkit-keyframes drop {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+@keyframes drop {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 110%;
+  }
+}
 .square {
-  height: 50px;
-  width: 50px;
+  height: 250px;
+  width: 250px;
   background-color: #555;
 }
 .circle {
-  height: 50px;
-  width: 50px;
+  height: 250px;
+  width: 250px;
   background-color: #555;
   border-radius: 50%;
+  margin: auto;
 }
 .triangle-up {
   width: 0;
   height: 0;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 50px solid #555;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-bottom: 250px solid #555;
+}
+
+.fade-in {
+  animation: fadeIn ease 5s;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+}
+.fade-in-10 {
+  animation: fadeIn ease 30s;
+  -webkit-animation: fadeIn ease 30s;
+  -moz-animation: fadeIn ease 30s;
+  -o-animation: fadeIn ease 30s;
+  -ms-animation: fadeIn ease 30s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
+
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      isActiveSquare: false,
+      isActiveTriangle: false,
+    }
+  },
+  methods:{
+    callFunction: function () {
+      var v = this;
+      setTimeout(function(){
+        v.isActiveCircle = true;
+      }, 1000);
+      setTimeout(function(){
+        v.isActiveSquare = true;
+      }, 2000);
+    }
+  },
+  mounted: function() {
+    this.callFunction()
+  },
+}
 </script>
 
