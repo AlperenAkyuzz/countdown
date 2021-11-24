@@ -5,14 +5,14 @@
       <div class="line" style="left: 75%;"></div>
       <div class="line"></div>
     </div>
-    <div class="right">
-      <div class="square" v-show="isActiveSquare" :class="isActiveSquare ? 'fade-in' : ''"></div>
+    <div :class="[ isMobile() ? 'center' : 'right']">
+      <div class="square" v-show="isActiveSquare" :class="[isActiveSquare ? 'fade-in' : '', isMobile() && isDisableSquare ? 'fade-out' : '']"></div>
     </div>
     <div class="center">
-      <div class="triangle-up fade-in"></div>
+      <div class="triangle-up fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '']"></div>
     </div>
-    <div class="left">
-      <div class="circle" v-show="isActiveCircle" :class="isActiveCircle ? 'fade-in' : ''"></div>
+    <div :class="[ isMobile() ? 'center' : 'left']">
+      <div class="circle" v-show="isActiveCircle" :class="[isActiveCircle ? 'fade-in' : '', isMobile() && isDisableCircle ? 'fade-out' : '']"></div>
     </div>
 
   </div>
@@ -130,6 +130,7 @@ body {
     top: 110%;
   }
 }
+
 .square {
   height: 250px;
   width: 250px;
@@ -208,29 +209,135 @@ body {
     opacity: 1;
   }
 }
+
+.fade-out {
+  animation: fadeOut ease 5s;
+  -webkit-animation: fadeOut ease 5s;
+  -moz-animation: fadeOut ease 5s;
+  -o-animation: fadeOut ease 5s;
+  -ms-animation: fadeOut ease 5s;
+}
+@keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    display: none;
+  }
+}
+
+@-moz-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    display: none;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    display: none;
+  }
+}
+
+@-o-keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    display: none;
+  }
+}
+
+@-ms-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+.d-none {
+  display: none !important;
+}
 </style>
 
 <script>
 export default {
   data() {
     return {
+      isActiveCircle: false,
       isActiveSquare: false,
-      isActiveTriangle: false,
+      isActiveTriangle: true,
+      isDisableCircle: false,
+      isDisableSquare: false,
+      isDisableTriangle: false,
+      circleVisible: true,
+      squareVisible: true,
+      triangleVisible: true,
     }
   },
   methods:{
     callFunction: function () {
       var v = this;
+      if(v.isMobile()) {
+        v.isActiveTriangle = false;
+        v.isActiveSquare = false
+        setTimeout(function(){
+          v.isActiveSquare = true;
+        }, 5000);
+      } else {
+        setTimeout(function(){
+          v.isActiveSquare = true;
+        }, 2000);
+      }
       setTimeout(function(){
         v.isActiveCircle = true;
       }, 1000);
+      if(this.isMobile()) {
+        setTimeout(function(){
+          v.isDisableCircle = true;
+        }, 5000);
+        setTimeout(function(){
+          v.isDisableSquare = true;
+        }, 10000);
+        setTimeout(function(){
+          v.isActiveTriangle = true;
+          v.isDisableTriangle = true;
+        }, 11000);
+      }
+    },
+    isMobile() {
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    hideAll: function () {
+      var v = this;
       setTimeout(function(){
-        v.isActiveSquare = true;
-      }, 2000);
+        v.isActiveCircle = false;
+      }, 10000);
+      setTimeout(function(){
+        v.isActiveSquare = false;
+      }, 15000);
     }
   },
   mounted: function() {
     this.callFunction()
+    if(this.isMobile()) {
+      this.hideAll()
+    }
   },
 }
 </script>
