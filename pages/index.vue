@@ -6,13 +6,19 @@
       <div class="line"></div>
     </div>
     <div :class="[ isMobile() ? 'center' : 'right']">
-      <div class="square" v-show="isActiveSquare" :class="[isActiveSquare ? 'fade-in' : '', isMobile() && isDisableSquare ? 'fade-out' : '']"></div>
+      <div class="" v-show="isActiveSquare" :class="[isActiveSquare ? 'fade-in' : '', isMobile() && isDisableSquare ? 'fade-out' : '']">
+        <nuxt-img src="/square.png" />
+      </div>
     </div>
     <div class="center">
-      <div class="triangle-up fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '']"></div>
+      <div class=" fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '']">
+        <nuxt-img src="/triangle.png" />
+      </div>
     </div>
     <div :class="[ isMobile() ? 'center' : 'left']">
-      <div class="circle" v-show="isActiveCircle" :class="[isActiveCircle ? 'fade-in' : '', isMobile() && isDisableCircle ? 'fade-out' : '']"></div>
+      <div class="" v-show="isActiveCircle" :class="[isActiveCircle ? 'fade-in' : '', isMobile() && isDisableCircle ? 'fade-out' : '']">
+        <nuxt-img src="/circle.png" />
+      </div>
     </div>
 
   </div>
