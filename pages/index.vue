@@ -312,6 +312,9 @@ export default {
           v.isWelcomeMessage = true;
           v.isActiveTriangle = false;
         }, 16000)
+        setTimeout(function() {
+          window.location.href = "https://google.com/contact";
+        }, 19000)
       } else {
         setTimeout(function(){
           v.isActiveSquare = true;
@@ -319,6 +322,9 @@ export default {
         setTimeout(function() {
           v.isWelcomeMessage = true;
         }, 4000)
+        setTimeout(function() {
+          window.location.href = "https://google.com/contact";
+        }, 8000)
       }
       setTimeout(function(){
         v.isActiveCircle = true;
