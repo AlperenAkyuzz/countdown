@@ -7,17 +7,17 @@
     </div>
     <div :class="[ isMobile() ? 'center' : 'right']">
       <div class="" v-show="isActiveSquare" :class="[isActiveSquare ? 'fade-in' : '', isMobile() && isDisableSquare ? 'fade-out' : '']">
-        <nuxt-img src="/square.png" />
+        <img src="/square.png" />
       </div>
     </div>
     <div class="center">
       <div class=" fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '']">
-        <nuxt-img src="/triangle.png" />
+        <img src="/triangle.png" />
       </div>
     </div>
     <div :class="[ isMobile() ? 'center' : 'left']">
       <div class="" v-show="isActiveCircle" :class="[isActiveCircle ? 'fade-in' : '', isMobile() && isDisableCircle ? 'fade-out' : '']">
-        <nuxt-img src="/circle.png" />
+        <img src="/circle.png" />
       </div>
     </div>
 
