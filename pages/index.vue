@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="center">
-      <div class=" fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '']">
+      <div class=" fade-in" v-show="isActiveTriangle" :class="[isMobile() && isActiveTriangle ? 'fade-in' : '', isMobile() && isWelcomeMessage ? 'fade-out' : '']">
         <img src="/triangle.png" />
       </div>
     </div>
@@ -20,6 +20,7 @@
         <img src="/circle.png" />
       </div>
     </div>
+    <div class="text-blue-50 " :class="[ isMobile() ? 'center text-3xl' : 'top-center text-5xl', isWelcomeMessage ? 'fade-in' : '']" v-show="isWelcomeMessage">Hoşgeldiniz</div>
 
   </div>
 </template>
@@ -275,6 +276,11 @@ body {
 .d-none {
   display: none !important;
 }
+.top-center {
+  margin: auto;
+  text-align: center;
+  padding-top: 14rem;
+}
 </style>
 
 <script>
@@ -290,6 +296,7 @@ export default {
       circleVisible: true,
       squareVisible: true,
       triangleVisible: true,
+      isWelcomeMessage: false
     }
   },
   methods:{
@@ -301,10 +308,17 @@ export default {
         setTimeout(function(){
           v.isActiveSquare = true;
         }, 5000);
+        setTimeout(function() {
+          v.isWelcomeMessage = true;
+          v.isActiveTriangle = false;
+        }, 16000)
       } else {
         setTimeout(function(){
           v.isActiveSquare = true;
         }, 2000);
+        setTimeout(function() {
+          v.isWelcomeMessage = true;
+        }, 4000)
       }
       setTimeout(function(){
         v.isActiveCircle = true;
@@ -321,6 +335,7 @@ export default {
           v.isDisableTriangle = true;
         }, 11000);
       }
+
     },
     isMobile() {
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
