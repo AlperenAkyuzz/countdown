@@ -313,7 +313,7 @@ export default {
           v.isActiveTriangle = false;
         }, 16000)
         setTimeout(function() {
-          window.location.href = "https://google.com/contact";
+          window.location.href = "https://www.instagram.com/tv/CW1DaqDDPo1/";
         }, 19000)
       } else {
         setTimeout(function(){
@@ -323,7 +323,7 @@ export default {
           v.isWelcomeMessage = true;
         }, 4000)
         setTimeout(function() {
-          window.location.href = "https://google.com/contact";
+          window.location.href = "https://www.instagram.com/tv/CW1DaqDDPo1/";
         }, 8000)
       }
       setTimeout(function(){
